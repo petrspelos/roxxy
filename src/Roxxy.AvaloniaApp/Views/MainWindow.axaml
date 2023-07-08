@@ -1,0 +1,70 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Roxxy.AvaloniaApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Roxxy.AvaloniaApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="{Binding Title}">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Spacing="5" Margin="10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding FilePath}"/>
+            </StackPanel>
+        </StackPanel>
+        <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform">
+            <Image Source="{Binding Image}" />
+        </Viewbox>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Spacing="5" Margin="20">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Text="Resolution:"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,10,0"/>
+                    <TextBlock Text="{Binding Resolution}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock 
+                        Text="Frames:"
+                        FontWeight="Bold" 
+                        HorizontalAlignment="Right" 
+                        Margin="0,0,10,0"/>
+                    <TextBlock Text="{Binding FramesCount}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="20">
+                    <StackPanel>
+                        <Button Command="{Binding SaveImageCommand}" CommandParameter=".jpg">Save as .jpg</Button>
+                        <Button Command="{Binding SaveImageCommand}" CommandParameter=".png">Save as .png</Button>
+                        <Button Command="{Binding SaveImageCommand}" CommandParameter=".bmp">Save as .bmp</Button>
+                        <Button Command="{Binding SaveImageCommand}" CommandParameter=".tga">Save as .tga</Button>
+                    </StackPanel>
+                    <StackPanel>
+                        <Button Command="{Binding CopyImageCommand}" CommandParameter=".jpg">Copy as .jpg</Button>
+                        <Button Command="{Binding CopyImageCommand}" CommandParameter=".png">Copy as .png</Button>
+                        <Button Command="{Binding CopyImageCommand}" CommandParameter=".bmp">Copy as .bmp</Button>
+                        <Button Command="{Binding CopyImageCommand}" CommandParameter=".tga">Copy as .tga</Button>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
